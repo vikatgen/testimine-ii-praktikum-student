@@ -1,0 +1,27 @@
+{
+  "name": "testing-ii-praktikum-students",
+  "version": "1.0.0",
+  "description": "Testimine II praktikum: Rannamõisa Käsitöökeskuse töötubade registreerimine (väike testitav rakendus)",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "newman": "npx --yes newman run -n 20 --delay-request 20 postman/rannamoisa.postman_collection.json -e postman/local.postman_environment.json --reporters cli,json --reporter-json-export postman/tulemus.json",
+    "p95": "node scripts/p95.js postman/tulemus.json"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^5.0.3",
+    "supertest": "^7.3.1",
+    "vitest": "^5.0.3"
+  }
+}

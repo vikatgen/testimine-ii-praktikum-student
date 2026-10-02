@@ -1,0 +1,16 @@
+name: Päevik
+description: Minu Testimine II päevik (üks issue kogu mooduli jooksul)
+title: "[PÄEVIK] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        See on sinu **päevik** kogu mooduli jooksul. Ava see **üks kord**, kinnita see (**Pin issue**) ja lisa iga kohtumise lõpus uus **kommentaar** õppelehel antud malli järgi.
+        Suuremad dokumendid (testiplaan, otsustustabel, testiaruanne) lisa samuti kommentaarina oma pealkirjaga.
+  - type: input
+    id: nimi
+    attributes:
+      label: Nimi
+      description: Sinu ees- ja perekonnanimi
+    validations:
+      required: true

@@ -1,0 +1,88 @@
+name: Veaaruanne
+description: Leidsin rakenduses vea, mis ei vasta nõuetele
+title: "[VIGA] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Issue on selle vea kogu elutsükkel.** Hiljem lisa siia kommentaarid: taasesitus, kukkuv test (nimi), parandus (commit või pull request). Sulge issue siis, kui parandus on liidetud ja testid on rohelised (pull requestis `Closes #...`).
+  - type: input
+    id: versioon
+    attributes:
+      label: Versioon või haru
+      description: Kus viga ilmnes? (nt `uus-versioon` või commit)
+    validations:
+      required: true
+  - type: dropdown
+    id: noue
+    attributes:
+      label: Nõue
+      description: Milline nõue ei ole täidetud?
+      options:
+        - "NR-1: vanus"
+        - "NR-2: hind vanuse järgi"
+        - "NR-3: osalejate arv"
+        - "NR-4: grupisoodus"
+        - "NR-5: liikmesoodus"
+        - "NR-6: soodustused ei summeeru"
+        - "NR-7: ümardamine"
+        - "NR-8: registreerimine avatud töötuppa"
+        - "NR-9: täis töötuba"
+        - "NR-10: korduv e-post"
+        - "NR-11: kinnitus"
+        - "NR-12: tagasimakse"
+        - "NR-13: töötoa olekud"
+        - "NR-14: töötoa loomine"
+        - "Muu / API"
+    validations:
+      required: true
+  - type: textarea
+    id: sammud
+    attributes:
+      label: Sammud
+      description: Täpsed sammud, mida teine inimene saab korrata (soovitavalt curl või Postmani päring).
+    validations:
+      required: true
+  - type: textarea
+    id: oodatud
+    attributes:
+      label: Oodatud tulemus
+      description: Mida nõue ütleb?
+    validations:
+      required: true
+  - type: textarea
+    id: tegelik
+    attributes:
+      label: Tegelik tulemus
+      description: Mida rakendus tegi?
+    validations:
+      required: true
+  - type: textarea
+    id: toendus
+    attributes:
+      label: Tõendus
+      description: Kukkunud testi nimi ja väljund.
+      render: text
+  - type: dropdown
+    id: tosidus
+    attributes:
+      label: Tõsidus
+      description: Kui tõsine on mõju kasutajale?
+      options:
+        - Kriitiline
+        - Suur
+        - Väike
+    validations:
+      required: true
+  - type: dropdown
+    id: prioriteet
+    attributes:
+      label: Prioriteet
+      description: Kui kiiresti tuleks parandada?
+      options:
+        - P1
+        - P2
+        - P3
+    validations:
+      required: true

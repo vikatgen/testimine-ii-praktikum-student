@@ -1,0 +1,4 @@
+node_modules/
+coverage/
+postman/tulemus.json
+.DS_Store

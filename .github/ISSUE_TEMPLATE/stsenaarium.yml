@@ -1,0 +1,68 @@
+name: Testistsenaarium
+description: Üks testistsenaarium Given / When / Then kujul
+title: "[TS] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Issue on selle stsenaariumi kogu elutsükkel.** Hiljem lisa siia kommentaarid: käsitsi läbimise tulemus, automaattesti nimi (`NR-x: ...`) ja viide commitile või pull requestile. Sulge issue, kui stsenaarium on läbitud (käsitsi või automaattestiga).
+  - type: dropdown
+    id: noue
+    attributes:
+      label: Nõue
+      options:
+        - "NR-1: vanus"
+        - "NR-2: hind vanuse järgi"
+        - "NR-3: osalejate arv"
+        - "NR-4: grupisoodus"
+        - "NR-5: liikmesoodus"
+        - "NR-6: soodustused ei summeeru"
+        - "NR-7: ümardamine"
+        - "NR-8: registreerimine avatud töötuppa"
+        - "NR-9: täis töötuba"
+        - "NR-10: korduv e-post"
+        - "NR-11: kinnitus"
+        - "NR-12: tagasimakse"
+        - "NR-13: töötoa olekud"
+        - "NR-14: töötoa loomine"
+        - "Muu / API"
+    validations:
+      required: true
+  - type: dropdown
+    id: liik
+    attributes:
+      label: Liik
+      options:
+        - Õnnestumine
+        - Viga
+        - Piir
+    validations:
+      required: true
+  - type: textarea
+    id: given
+    attributes:
+      label: Given (algseis)
+    validations:
+      required: true
+  - type: textarea
+    id: when
+    attributes:
+      label: When (tegevus)
+    validations:
+      required: true
+  - type: textarea
+    id: then
+    attributes:
+      label: Then (oodatud tulemus)
+    validations:
+      required: true
+  - type: dropdown
+    id: prioriteet
+    attributes:
+      label: Prioriteet
+      options:
+        - P1
+        - P2
+        - P3
+    validations:
+      required: true

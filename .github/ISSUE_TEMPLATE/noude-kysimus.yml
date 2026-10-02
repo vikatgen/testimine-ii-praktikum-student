@@ -1,0 +1,37 @@
+name: Küsimus nõude kohta
+description: Nõue on ebaselge või vastuoluline
+title: "[KÜSIMUS] "
+labels: ["question"]
+body:
+  - type: dropdown
+    id: noue
+    attributes:
+      label: Nõue
+      options:
+        - "NR-1: vanus"
+        - "NR-2: hind vanuse järgi"
+        - "NR-3: osalejate arv"
+        - "NR-4: grupisoodus"
+        - "NR-5: liikmesoodus"
+        - "NR-6: soodustused ei summeeru"
+        - "NR-7: ümardamine"
+        - "NR-8: registreerimine avatud töötuppa"
+        - "NR-9: täis töötuba"
+        - "NR-10: korduv e-post"
+        - "NR-11: kinnitus"
+        - "NR-12: tagasimakse"
+        - "NR-13: töötoa olekud"
+        - "NR-14: töötoa loomine"
+        - "Muu / API"
+    validations:
+      required: true
+  - type: textarea
+    id: ebaselge
+    attributes:
+      label: Mis on ebaselge?
+    validations:
+      required: true
+  - type: textarea
+    id: arvan
+    attributes:
+      label: Kuidas ma nõuet mõistan?

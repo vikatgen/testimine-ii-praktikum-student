@@ -1,0 +1,235 @@
+{
+  "info": {
+    "name": "Rannamõisa API (kohtumine 9)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200 ja status ok\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().status).to.eql(\"ok\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Loo töötuba",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/workshops",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "workshops"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Keraamika {{$timestamp}}\",\n  \"capacity\": 20,\n  \"basePrice\": 25,\n  \"startsAt\": \"{{startsAt}}\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const d = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000);",
+              "pm.collectionVariables.set(\"startsAt\", d.toISOString());"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"201 ja olek draft\", function () {",
+              "  pm.response.to.have.status(201);",
+              "  pm.expect(pm.response.json().status).to.eql(\"draft\");",
+              "});",
+              "pm.collectionVariables.set(\"workshopId\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ava registreerimine",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/workshops/{{workshopId}}/publish",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "workshops",
+            "{{workshopId}}",
+            "publish"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200 ja olek open\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().status).to.eql(\"open\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registreeri",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/workshops/{{workshopId}}/registrations",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "workshops",
+            "{{workshopId}}",
+            "registrations"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"kati{{$timestamp}}@example.ee\",\n  \"ages\": [\n    30,\n    10\n  ],\n  \"member\": false\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"201 ja hind 37.5\", function () {",
+              "  pm.response.to.have.status(201);",
+              "  pm.expect(pm.response.json().price).to.eql(37.5);",
+              "});",
+              "pm.test(\"vastus on alla 500 ms\", function () {",
+              "  pm.expect(pm.response.responseTime).to.be.below(500);",
+              "});",
+              "pm.collectionVariables.set(\"registrationId\", pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vaata töötuba",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/workshops/{{workshopId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "workshops",
+            "{{workshopId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Aruanne",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/reports/summary",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "reports",
+            "summary"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "workshopId",
+      "value": ""
+    },
+    {
+      "key": "registrationId",
+      "value": ""
+    },
+    {
+      "key": "startsAt",
+      "value": ""
+    }
+  ]
+}
